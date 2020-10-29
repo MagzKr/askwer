@@ -8,3 +8,6 @@ class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-added_at']

@@ -2,5 +2,20 @@
 {% block page_content %}
 <h2 class="question_title">{{ question.title }} </h2>
 <div class="question_text"> {{ question.text }}</div>
+<h2 id="answer_text">
+    Your Answer
+</h2>
 
+<form class="answer form", method="post">
+    {{ answer_form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Add answer"></p>
+</form>
+{% if answers %}
+    {%for answer in answers %}
+    <div class="answer">
+        <span> {{ answer.text }} </span> <span>{{answer.author}}</span>
+    </div>
+    {% endfor %}
+{% endif %}
 {% endblock %}

@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from question.models import Question
+from answer.forms import AnswerForm
+from answer.models import Answer
+from answer.views import create_answer
 # Create your views here.
 
 def Question_list_view(request):
@@ -9,5 +12,14 @@ def Question_list_view(request):
 
 def Question_details(request, pk):
     question = get_object_or_404(Question, pk=pk)
-    context = {'question':question}
+    answers = Answer.objects.filter(question=pk)
+    answer_form = AnswerForm()
+
+    if request.method == 'POST':
+        create_answer(request,question)
+
+    context = {
+        'question': question,
+        'answers': answers,
+        'answer_form': answer_form}
     return render(request, 'question/question_details.html', context)

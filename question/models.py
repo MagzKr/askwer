@@ -9,10 +9,14 @@ class Question_manager(models.Manager):
     def popular(self):
         return self.order_by('-rating')
 
+class Tag(models.Model):
+    tag = models.CharField(max_length=25)
+
 
 class Question(models.Model):
     title = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag, related_name='Question_tags', blank=True)
     text = models.TextField()
     added_at = models.DateTimeField(default=timezone.now)
     rating = models.IntegerField(default=0)
