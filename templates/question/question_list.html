@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>New Questions</h1>
+{% for question in question_list %}
+    <a class="question_link"
+    href="{% url 'question_detail_view' question.pk %}"
+    > {{ question.title }} </a>
+    <div> {{ question.text }} </div>
+{% endfor %}
+{% endblock %}
