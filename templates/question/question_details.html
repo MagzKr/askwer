@@ -1,21 +1,29 @@
 {% extends "base.html" %}
-{% block page_content %}
-<h2 class="question_title">{{ question.title }} </h2>
-<div class="question_text"> {{ question.text }}</div>
+{% block content %}
+{% load static %}
+<div id='questionPk' style="display: none;"> {{question.pk}} </div>
+
+<h2  class="question title">{{ question.title }} </h2>
+<div class="question text"> {{ question.text }}</div>
 <h2 id="answer_text">
     Your Answer
 </h2>
 
-<form class="answer form", method="post">
-    {{ answer_form.as_p }}
+<form id="answerForm">
     {% csrf_token %}
-    <p><input type="submit" value="Add answer"></p>
+    <textarea placeholder='Add answer'></textarea><br>
+    <button id="answerButton">Add answer</button>
 </form>
+<div class="answer container">
 {% if answers %}
     {%for answer in answers %}
-    <div class="answer">
+    <div class="answer row">
         <span> {{ answer.text }} </span> <span>{{answer.author}}</span>
     </div>
     {% endfor %}
+</div>
 {% endif %}
+
+<script src="{% static 'js/jquery-3.5.1.js' %}"></script>
+<script src="{% static 'js/answers.js' %}"></script>
 {% endblock %}

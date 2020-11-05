@@ -1,8 +1,10 @@
 from  django import forms
 from  .models import Answer
+from django.shortcuts import redirect
 
 class AnswerForm(forms.ModelForm):
-    answer_text = forms.Textarea()
     class Meta:
         model = Answer
         fields = ['text']
+
+

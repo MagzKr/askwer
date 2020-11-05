@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,19 +9,30 @@
     </title>
 </head>
 <body>
+<header>
 <div class="top banner">
-    <a class="logo" href="/"> ASKWER</a>
-        <span class="login">
+    <h1>
+        <a class="logo" href="/"> ASKWER</a>
+    </h1>
+            <div class="menu">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                    <a href="{% url 'profile' %}">{{ user.username }}</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signup' %}">Sign Up</a>
+                {% endif %}
+            </div>
+    <div class="ask button">
         {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Logout</a>
-            <a href="{% url 'profile' %}">{{ user.username }}</a>
+            <a href="{% url 'ask_question' %}">Ask Question</a>
         {% else %}
-            <a href="{% url 'login' %}">Login</a>
-            <a href="{% url 'signup' %}">Sign Up</a>
+            <a href="{% url 'login' %}">Ask Question</a>
         {% endif %}
-        </span>
+    </div>
 </div>
-    {% block page_content %}{% endblock %}
+</header>
+{% block content %}{% endblock %}
 
 </body>
 </html>

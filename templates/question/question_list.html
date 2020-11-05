@@ -1,10 +1,30 @@
 {% extends "base.html" %}
-{% block page_content %}
+{% block content %}
 <h1>New Questions</h1>
 {% for question in question_list %}
-    <a class="question_link"
-    href="{% url 'question_detail_view' question.pk %}"
-    > {{ question.title }} </a>
-    <div> {{ question.text }} </div>
+    <div class="question">
+        <h3>
+            <a class="question_link" href="{% url 'question_detail_view' question.pk %}"> {{ question.title }}
+                </a>
+        </h3>
+        <div id="question text"> {{ question.text }}
+            </div>
+        <div class="date">{{ question.added_at | date:"H:i:s d-M-Y" }}
+            </div>
+        <div class="username"> {{ question.author }}
+            </div>
+        <div class="rating">{{ question.rating }}
+            </div>
+        <div class="tags">
+        <div class="like">
+            <a></a>
+            </div>
+            <ul>
+                {% for tag in question.tags.all %}
+                    <li> {{ tag.name }} </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endfor %}
 {% endblock %}

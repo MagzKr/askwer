@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form class="ask form", method="post">
+    {{ question_form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Add question"></p>
+</form>
+{% endblock %}
