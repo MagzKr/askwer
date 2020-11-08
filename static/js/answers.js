@@ -4,13 +4,13 @@ $('#answerForm').on('submit',function(post){
     type: 'POST',
     url: '/answers/create_answer/',
     data: {
-       'questionPk': $('#questionPk').text(),
+       'questionPk': questionPk,
        'text': $('#answerForm textarea').val(),
        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
     },
-    dataType: 'json',
+    dataType: 'html',
     success: function(data){
-         $('.commentStyle').append(data)
+         $('#answerList').prepend(data);
    }
   });
 });

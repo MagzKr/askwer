@@ -1,10 +1,10 @@
 from .models import Answer
 from question.models import Question
 from django.contrib.auth.models import User
+from django.shortcuts import render
 
 def create_answer(request):
         new_answer = Answer()
-        print(request.POST)
         if request.user.is_authenticated:
             new_answer.author = request.user
         else:
@@ -12,7 +12,7 @@ def create_answer(request):
         new_answer.question = Question.objects.get(pk=request.POST.get('questionPk'))
         new_answer.text = request.POST.get('text')
         new_answer.save()
-        return None
+        return render(request, 'answer/single_answer.html', {'answer':new_answer})
 
 
 def get_answers(pk):

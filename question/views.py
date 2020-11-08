@@ -1,16 +1,23 @@
 from django.shortcuts import render, get_object_or_404
 from question.models import Question
-from answer.forms import AnswerForm
 from .forms import QuestionForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from answer.views import get_answers
+from django.core.paginator import Paginator, PageNotAnInteger
 
 # Create your views here.
 
 def question_list_view(request):
     question_list = Question.objects.new()
-    context = {'question_list':question_list}
+    page = request.GET.get('page', 1)
+    paginator = Paginator(question_list, 10)
+    try:
+        questions = paginator.page(page)
+    except PageNotAnInteger:
+        questions = paginator.page(1)
+
+    context = {'question_list':questions}
     return render(request, 'question/question_list.html', context)
 
 

@@ -1,11 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-<div id='questionPk' style="display: none;"> {{question.pk}} </div>
+<div class="content container">
+<div class="question-summary container">
+            <div class="statscontainer">
+                    <div class="rating">{{ question.rating }}</div>
+                    <div class="rating-text"> votes </div>
+            </div>
+            <div class="summary">
+                <h3>
+                    {{ question.title }}
+                </h3>
+                <div class="text"> {{ question.text }}</div>
+                <div class="user-info">
+                    <div class="author"> Asked by {{ question.author }}</div>
+                    <div class='date'>{{ question.added_at | date:"H:i:s d M Y" }}</div>
+                </div>
+            </div>
+        </div>
 
-<h2  class="question title">{{ question.title }} </h2>
-<div class="question text"> {{ question.text }}</div>
-<h2 id="answer_text">
+<h2>
     Your Answer
 </h2>
 
@@ -14,16 +28,23 @@
     <textarea placeholder='Add answer'></textarea><br>
     <button id="answerButton">Add answer</button>
 </form>
-<div class="answer container">
+<div id='answerList' class="container">
 {% if answers %}
     {%for answer in answers %}
     <div class="answer row">
-        <span> {{ answer.text }} </span> <span>{{answer.author}}</span>
+        <div class="text"> {{ answer.text }} </div>
+        <div class="user-info">
+            <div class="author"> Answered by {{ answer.author }}</div>
+            <div class='date'>{{ answer.added_at | date:"H:i:s d M Y" }}</div>
+        </div>
     </div>
     {% endfor %}
 </div>
 {% endif %}
-
+</div>
+<div>
+<script> const questionPk = {{ question.pk }} </script>
 <script src="{% static 'js/jquery-3.5.1.js' %}"></script>
 <script src="{% static 'js/answers.js' %}"></script>
+</div>
 {% endblock %}
