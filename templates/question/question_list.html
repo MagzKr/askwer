@@ -24,16 +24,6 @@
                 </div>
             </div>
         </div>
-            <div class="tags">
-                <div class="like">
-                    <a></a>
-                </div>
-                <ul>
-                    {% for tag in question.tags.all %}
-                    <li> {{ tag.name }} </li>
-                    {% endfor %}
-                </ul>
-            </div>
 
 {% endfor %}
     {% if question_list.has_other_pages %}
@@ -47,5 +37,4 @@
     {% endfor %}
     {% endif %}
   </div>
-</div>
 {% endblock %}
