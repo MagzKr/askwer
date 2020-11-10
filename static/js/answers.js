@@ -5,13 +5,20 @@ $('#answerForm').on('submit',function(post){
     url: '/answers/create_answer/',
     data: {
        'questionPk': questionPk,
-       'text': $('#answerForm textarea').val(),
+       'text': $('#answerText').val(),
        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
     },
     dataType: 'html',
     success: function(data){
          $('#answerList').prepend(data);
+         $('#answerText').val('');
+         },
+    error: function(data){
+           console.log(data)
+          $('#answerText').val(data['responseText']);
+    }
+
    }
-  });
+  );
 });
 
