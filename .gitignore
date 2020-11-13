@@ -1,3 +1,5 @@
-# Project exclude paths
-/venv/
-/askwer/.env
+.Python
+.env
+venv/
+*.sqlite3
+**/migrations
