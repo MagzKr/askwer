@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.http import HttpResponseBadRequest
 
+
 def text_valid(text):
     if text != '':
         return True
@@ -31,15 +32,5 @@ def get_answers(pk):
     return Answer.objects.filter(question=pk)
 
 
-# def likePost(request):
-#     if request.method == 'GET':
-#             post_id = request.GET['post_id']
-#             likedpost = Post.objects.get(pk=post_id)  # getting the liked posts
-#             m = Like(post=likedpost)  # Creating Like Object
-#             m.save()  # saving it to store in database
-#             return HttpResponse("Success!")  # Sending an success response
-#     else:
-#             return HttpResponse("Request method is not a GET")
-# def new_answers():
 
 

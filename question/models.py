@@ -3,15 +3,13 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.urls import reverse
-# Create your models here.
+
 
 class Question_manager(models.Manager):
     def new(self):
         return self.order_by('-added_at')
     def popular(self):
         return self.order_by('-rating')
-
-
 
 
 class Question(models.Model):
