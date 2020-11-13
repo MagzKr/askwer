@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect
 from answer.views import get_answers
 from django.core.paginator import Paginator, PageNotAnInteger
 
-# Create your views here.
 
 def question_list_view(request):
     question_list = Question.objects.new()
@@ -19,9 +18,6 @@ def question_list_view(request):
 
     context = {'question_list':questions}
     return render(request, 'question/question_list.html', context)
-
-
-
 
 
 def question_details(request, pk):

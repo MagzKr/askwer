@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from account.forms import RegisterForm
 from django.contrib.auth import login, authenticate
-# Create your views here.
+
 
 def signup_view(request):
     form = RegisterForm(request.POST)
