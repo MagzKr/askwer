@@ -1,5 +1,6 @@
 .Python
 .env
+.idea
 venv/
 *.sqlite3
 **/migrations
