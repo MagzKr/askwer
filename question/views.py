@@ -17,7 +17,9 @@ def question_list_view(request):
     except PageNotAnInteger:
         questions = paginator.page(1)
 
-    context = {'question_list':questions}
+    context = {
+        'question_list':questions
+    }
     return render(request, 'question/question_list.html', context)
 
 

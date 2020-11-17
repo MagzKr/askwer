@@ -2,8 +2,8 @@ from .models import Answer
 from question.models import Question
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from django.http import HttpResponseBadRequest
-
+from django.http import HttpResponseBadRequest, JsonResponse
+import json
 def text_valid(text):
     if text != '':
         return True
@@ -21,7 +21,9 @@ def create_answer(request):
         new_answer.text = request.POST.get('text')
         if text_valid(new_answer.text):
             new_answer.save()
-            return render(request, 'answer/single_answer.html', {'answer':new_answer})
+            return JsonResponse({'answer_text':new_answer.text,
+                                 'author':'sss',
+                                 'date':new_answer.added_at})
         else:
             error = b'You give bad answer!'
             return HttpResponseBadRequest(error)

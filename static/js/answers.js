@@ -6,9 +6,9 @@ $('#answerForm').on('submit',function(post){
     data: {
        'questionPk': questionPk,
        'text': $('#answerText').val(),
-       csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+       'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
     },
-    dataType: 'html',
+    dataType: 'json',
     success: function(data){
          $('#answerList').prepend(data);
          $('#answerText').val('');
