@@ -3,9 +3,6 @@ python:
     - 3.6
 services:
     - docker
-
-install:
-    - pip install -r requirements.txt
 before_script:
     - pip install docker-compose
     - docker-compose build
