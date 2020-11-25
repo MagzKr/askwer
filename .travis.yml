@@ -8,4 +8,5 @@ before_script:
     - docker-compose build
     - docker-compose up -d
 script:
+    - sleep 20
     - docker-compose run web python manage.py test question
