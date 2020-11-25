@@ -9,4 +9,4 @@ before_script:
     - docker-compose up -d
 script:
     - sleep 20
-    - docker-compose run web python manage.py test question
+    - docker-compose exec web python manage.py test question
