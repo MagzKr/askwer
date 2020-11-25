@@ -6,6 +6,6 @@ services:
 before_script:
     - pip install docker-compose
     - docker-compose build
-    - docker-compose up
+    - docker-compose up -d
 script:
     - docker-compose run web python manage.py test question
