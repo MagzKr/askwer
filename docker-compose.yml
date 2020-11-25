@@ -3,21 +3,32 @@ version: '3.7'
 services:
   web:
     build: ./
-    command: python manage.py runserver 0.0.0.0:8000
+    command: sh entrypoint.sh
     volumes:
       - ./app/:/usr/src/app/
+    environment:
+      - DEBUG=${DEBUG}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
+      - SQL_ENGINE=${SQL_ENGINE}
+      - SQL_DATABASE=${SQL_DATABASE}
+      - SQL_USER=${SQL_USER}
+      - SQL_PASSWORD=${SQL_PASSWORD}
+      - SQL_HOST=${SQL_HOST}
+      - SQL_PORT=${SQL_PORT}
     ports:
       - 8000:8000
-    env_file:
-      - ./.env.dev
+    depends_on:
+      - db
+
   db:
     image: postgres:12.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=django_user
-      - POSTGRES_PASSWORD=asdzxc
-      - POSTGRES_DB=askwer
+      - POSTGRES_USER=${SQL_USER}
+      - POSTGRES_PASSWORD=${SQL_PASSWORD}
+      - POSTGRES_DB=${SQL_DATABASE}
 
 volumes:
   postgres_data:
