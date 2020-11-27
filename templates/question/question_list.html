@@ -1,40 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-<div class="grid">
+    <div class="grid">
         <h1 class="grid--cell fl1 fs-headline1">New Questions</h1>
     </div>
 </div>
 
 {% for question in question_list %}
-    <div class="question-summary container">
-            <div class="statscontainer">
-                    <div class="rating">{{ question.rating }}</div>
-                    <div class="rating-text"> votes </div>
-            </div>
-            <div class="summary">
-                <h3>
-                    <a class="question_link" href="{% url 'question_detail_view' question.pk %}"> {{ question.title }}</a>
-                </h3>
-
-                <div class="text"> {{ question.text|truncatechars:250 }}</div>
-                <div class="user-info">
-                    <div class="author"> Asked by {{ question.author }}</div>
-                    <div class='date'>{{ question.added_at | date:"H:i:s d M Y" }}</div>
-                </div>
-            </div>
-        </div>
-
+    {% include "question/single_question.html" %}
 {% endfor %}
-    {% if question_list.has_other_pages %}
-  <div class="pagination container">
-    {% for i in question_list.paginator.page_range %}
-      {% if question_list.number == i %}
-        <span class="page-item selected">{{ i }}</span>
-      {% else %}
-        <a class="page-item" href="?page={{ i }}">{{ i }}</a>
-      {% endif %}
-    {% endfor %}
-    {% endif %}
-  </div>
+
+{% if question_list.has_other_pages %}
+    <div class="pagination container">
+        {% for i in question_list.paginator.page_range %}
+            {% if question_list.number == i %}
+                <span class="page-item selected">{{ i }}</span>
+            {% else %}
+                <a class="page-item" href="?page={{ i }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
 {% endblock %}

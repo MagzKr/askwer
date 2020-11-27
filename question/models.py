@@ -7,7 +7,7 @@ from django.urls import reverse
 
 class Question_manager(models.Manager):
     def new(self):
-        return self.order_by('-added_at')
+        return self.all().select_related('author').order_by('-added_at')
     def popular(self):
         return self.order_by('-rating')
 
