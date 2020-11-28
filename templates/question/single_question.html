@@ -1,8 +1,26 @@
 <div class="question-summary container">
-    <div class="statscontainer">
-        <div class="rating">{{ question.rating }}</div>
-        <div class="rating-text"> votes</div>
-    </div>
+    {% if page_name == 'question_list' %}
+        <div class="statscontainer">
+            <div class="rating">{{ question.rating }}</div>
+            <div class="rating-text"> votes</div>
+        </div>
+    {% endif %}
+    {% if page_name == 'question_details' %}
+         <div class="statscontainer">
+            <button class="js-vote-btn up" aria-label="Up vote">
+                <svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
+                    <path d="M2 26h32L18 10 2 26z"></path>
+                </svg>
+            </button>
+            <div class="rating">{{ question.rating }}</div>
+            <div class="rating-text"> votes</div>
+             <button class="js-vote-btn down" aria-label="Down vote">
+                 <svg width="36" height="36" viewBox="0 0 36 36">
+                     <path d="M2 10h32L18 26 2 10z"></path>
+                 </svg>
+             </button>
+        </div>
+    {% endif %}
     <div class="summary">
         <h3>
             <a class="question_link" href="{% url 'question_detail_view' question.pk %}"> {{ question.title }}</a>

@@ -19,6 +19,7 @@ class Question(models.Model):
     added_at = models.DateTimeField(default=timezone.now)
     rating = models.IntegerField(default=0)
     likes = models.ManyToManyField(User, related_name='Users_liked_question', blank=True)
+    dislikes = models.ManyToManyField(User, related_name='Users_disliked_question', blank=True)
     objects = Question_manager()
     tags = TaggableManager()
 

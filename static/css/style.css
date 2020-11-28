@@ -3,6 +3,7 @@ body{padding-top:50px;}
             text-decoration: none;
  }
 
+
  .navbar{border-top: 3px solid #f48024;
         height: 50px;
         background-color: #fafafb;
@@ -12,17 +13,25 @@ body{padding-top:50px;}
 .nav-link , .navbar-brand{
                             color: #848d95; cursor: pointer;
 }
+
+
 .nav-link{
             margin-right: 1em !important;
 }
+
+
 .nav-link:hover{
                  border-radius: 3px;
                  background: #f4f4f4;
                  color: #f97300;
 }
+
+
 .navbar-collapse{
                  justify-content: flex-end;
 }
+
+
 .navbar-toggler{
                  background:#fff !important;
 }
@@ -73,7 +82,8 @@ body{padding-top:50px;}
 }
 .rating {
           margin-top: 5px;
-          margin-left: 7px;
+          text-align: center;
+          width: 50px;
 }
 
 .summary {
@@ -98,6 +108,9 @@ body{padding-top:50px;}
 .rating-text{
                font-size: 10px;
                color: #848d95;
+               text-align: center;
+               margin-bottom: 5px;
+               width: 50px;
 }
 
 textarea{
@@ -112,10 +125,25 @@ textarea{
 
 }
 .user-info{
-                width: 200px;
-                margin-left:auto;
+           width: 200px;
+           margin-left:auto;
 }
 
 .pagination{
             margin-top:30px;
+}
+
+.js-vote-btn{
+            border: 1px solid transparent;
+            background-color: transparent;
+            fill: #c5c5c5;
+
+}
+.js-vote-btn:focus{
+                   outline: none;
+}
+
+
+svg:active {
+    fill: #f48024;
 }

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from answer.views import get_answers
 from django.core.paginator import Paginator, PageNotAnInteger
-
+from django.http import JsonResponse
 
 def question_list_view(request):
     question_list = Question.objects.new()
@@ -17,7 +17,8 @@ def question_list_view(request):
         questions = paginator.page(1)
 
     context = {
-        'question_list':questions
+        'question_list':questions,
+        'page_name':'question_list'
     }
     return render(request, 'question/question_list.html', context)
 
@@ -28,6 +29,7 @@ def question_details(request, pk):
     context = {
         'question': question,
         'answers': answers,
+        'page_name': 'question_details'
     }
 
     return render(request, 'question/question_details.html', context)
@@ -53,3 +55,19 @@ def ask_question(request):
     }
     return render(request, 'question/ask_question.html', context)
 
+def rate_question(request):
+    if request.user.is_authenticated:
+        question = Question.objects.get(pk=request.POST.get('pk'))
+    else:
+        return JsonResponse({'response': 'User is not authenticated'})
+
+    if request.POST.get('method') == 'up':
+        if request.user not in question.likes:
+            question.rating += 1
+            question.likes.add(request.user)
+            question.save()
+            return  JsonResponse({'response': 'Success'})
+    if request.POST.get('method') == 'down':
+        if request.user not in question.dislikes:
+            question.rating -= 1
+            question.likes.add(request.user)
