@@ -8,7 +8,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 DEBUG = bool(os.environ.get("DEBUG"))
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", 'localhost 127.0.0.1').split(" ")
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", 'localhost 127.0.0.1 askwer-app.herokuapp.com').split(" ")
 
 
 INSTALLED_APPS = [
