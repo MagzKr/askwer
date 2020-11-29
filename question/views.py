@@ -2,10 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from question.models import Question
 from .forms import QuestionForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponseBadRequest
 from answer.views import get_answers
 from django.core.paginator import Paginator, PageNotAnInteger
-from django.http import JsonResponse
 
 def question_list_view(request):
     question_list = Question.objects.new()
@@ -55,19 +54,29 @@ def ask_question(request):
     }
     return render(request, 'question/ask_question.html', context)
 
+@login_required
 def rate_question(request):
     if request.user.is_authenticated:
-        question = Question.objects.get(pk=request.POST.get('pk'))
+        question = Question.objects.get(pk=request.POST.get('questionPk'))
     else:
         return JsonResponse({'response': 'User is not authenticated'})
 
     if request.POST.get('method') == 'up':
-        if request.user not in question.likes:
+        if request.user not in question.likes.all():
             question.rating += 1
-            question.likes.add(request.user)
+            if request.user in question.dislikes.all():
+                question.dislikes.remove(request.user)
+            else:
+                question.likes.add(request.user)
             question.save()
-            return  JsonResponse({'response': 'Success'})
+            return JsonResponse({'response': 'Success', 'rating':question.rating})
+
     if request.POST.get('method') == 'down':
-        if request.user not in question.dislikes:
+        if request.user not in question.dislikes.all():
             question.rating -= 1
-            question.likes.add(request.user)
+            if request.user in question.likes.all():
+                question.likes.remove(request.user)
+            else:
+                question.dislikes.add(request.user)
+            question.save()
+            return JsonResponse({'response': 'Success', 'rating':question.rating})
