@@ -92,15 +92,17 @@ def rate_question(request):
             return JsonResponse({'response': 'Success', 'rating':question.rating})
 
 def add_random_question(request):
-    for i in range(1000):
-        with open('/home/magz/PycharmProjects/askwer/question/words', 'r') as text:
-            words = text.readline()
-            words = words.split(' ')
-            new_question = Question()
-            new_question.title = ' '.join(random.choices(words, k=4))
-            new_question.author = request.user
-            new_question.text = ' '.join(random.choices(words, k=4))
-            new_question.rating = random.randint(-100, 100)
-            new_question.save()
-    return JsonResponse({'AAA':'AAA'})
+    for i in range(100):
+        text = 'itertools.product will generate all the possible values. Instead, what you want is to pick n random characters from chrs and concatenate them'
+        tags = ['python', 'js', 'django', 'java', 'sql', 'css', 'html']
+        words = text.split()
+        new_question = Question()
+        new_question.title = ' '.join(random.choices(words, k=4))
+        new_question.author = request.user
+        new_question.text = ' '.join(random.choices(words, k=20))
+        new_question.rating = random.randint(-100, 100)
+        new_question.save()
+        for i in range(random.randint(0, len(tags))):
+            new_question.tags.add(random.choice(tags))
+    return JsonResponse({'Response': 'OK'})
 
