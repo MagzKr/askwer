@@ -1,11 +1,12 @@
 <div class="question-summary container">
-    {% if page_name == 'question_list' %}
+
+    {% if page_type == 'question_list' %}
         <div class="statscontainer">
             <div class="rating">{{ question.rating }}</div>
             <div class="rating-text"> votes</div>
         </div>
     {% endif %}
-    {% if page_name == 'question_details' %}
+    {% if page_type == 'question_details' %}
          <div class="statscontainer">
             <button class="js-vote-btn up" aria-label="Up vote">
                 <svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
@@ -24,8 +25,17 @@
         <h3>
             <a class="question_link" href="{% url 'question_detail_view' question.pk %}"> {{ question.title }}</a>
         </h3>
-
-        <div class="text"> {{ question.text|truncatechars:250 }}</div>
+        {% if page_type == 'question_list' %}
+            <div class="text"> {{ question.text|truncatechars:250 }}</div>
+        {% endif %}
+        {% if page_type == 'question_details' %}
+             <div class="text"> {{ question.text|truncatechars:250 }}</div>
+        {% endif %}
+        <div class="question-tags row">
+            {% for tag in question.tags.all %}
+                <a class="post-tag" href="/?tag={{ tag }}">{{ tag }}</a>
+            {% endfor %}
+        </div>
         <div class="user-info">
             <div class="author"> Asked by {{ question.author }}</div>
             <div class='date'>{{ question.added_at | date:"H:i:s d M Y" }}</div>

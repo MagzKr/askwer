@@ -126,7 +126,7 @@ textarea{
 
 }
 .user-info{
-           width: 200px;
+           width: 130px;
            margin-left:auto;
 }
 
@@ -147,4 +147,55 @@ textarea{
 
 svg:active {
     fill: #f48024;
+}
+
+.tag-title {
+    margin-left: 30%;
+    margin-top: 65px;
+}
+
+.taglist.col-1 {
+    margin-left: 30%;
+}
+
+.question-tags{
+    margin-left: 5%;
+
+}
+.post-tag{
+       background-color: #e1ecf4;
+       padding: .4em .5em;
+       font-size: 12px;
+       border-width: 1px;
+       border-style: solid;
+       border-radius: 3px;
+       text-align: center;
+       border-color: #00000000;
+       margin: 2px 5px 2px 0;
+       color: #39739d;
+}
+
+.post-tag:hover {
+    color: #2c5777;
+    background-color: #d1e5f1;
+    border-color: #00000000;
+}
+.tag-item{
+       background-color: #e1ecf4;
+       padding: .4em .5em;
+       font-size: 16px;
+       border-width: 1px;
+       border-style: solid;
+       border-radius: 3px;
+       text-align: center;
+       border-color: #00000000;
+       margin: 10px;
+       color: #39739d;
+       width: max-content;
+}
+
+.tag-item:hover {
+    color: #2c5777;
+    background-color: #d1e5f1;
+    border-color: #00000000;
 }
