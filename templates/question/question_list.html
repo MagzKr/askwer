@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="content col-7">
-    <h1 class="title row">{{ page_name }}</h1>
+    <h1 class="title row">{{ page_title }}</h1>
     <div class="questions row">
     {% for question in question_list %}
         {% include "question/single_question.html" %}
