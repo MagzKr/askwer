@@ -1,0 +1,9 @@
+<div class="tags col-3">
+    <h2 class="tag-title">Tags</h2>
+    <div class="taglist col-1">
+        <a class="tag-item row" href="/"> All </a>
+        {% for tag in all_tags %}
+            <a class="tag-item row" href="/?tag={{ tag }}"> {{ tag }}</a>
+        {% endfor %}
+    </div>
+</div>

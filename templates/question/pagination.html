@@ -1,0 +1,7 @@
+{% for i in question_list.paginator.page_range %}
+    {% if question_list.number == i %}
+        <span class="page-item selected">{{ i }}</span>
+    {% else %}
+        <a class="page-item" href="?page={{ i }}">{{ i }}</a>
+    {% endif %}
+{% endfor %}

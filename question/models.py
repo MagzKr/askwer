@@ -7,9 +7,11 @@ from django.urls import reverse
 
 class Question_manager(models.Manager):
     def new(self):
-        return self.all().select_related('author').order_by('-added_at')
+        return self.select_related('author').order_by('-added_at')
     def popular(self):
-        return self.order_by('-rating')
+        return self.select_related('author').order_by('-rating')
+    def get_tag(self, tag):
+        return self.select_related('author').filter(tags__name__in=[tag]).order_by('-added_at')
 
 
 class Question(models.Model):
@@ -22,7 +24,6 @@ class Question(models.Model):
     dislikes = models.ManyToManyField(User, related_name='Users_disliked_question', blank=True)
     objects = Question_manager()
     tags = TaggableManager()
-
 
     def get_url(self):
         return reverse('question_detail_view', args=[str(self.pk)])
