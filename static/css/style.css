@@ -199,3 +199,15 @@ svg:active {
     background-color: #d1e5f1;
     border-color: #00000000;
 }
+.row{
+    margin-right: 0px;
+}
+
+.footer{
+     background-color: #242729;
+     height: 130px;
+     color: #bbc0c4;
+     margin-top: 50px;
+     text-align: center;
+     padding-top: 50px;
+}

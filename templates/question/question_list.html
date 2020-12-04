@@ -1,17 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="content col-7">
-    <h1 class="title row">{{ page_title }}</h1>
-    <div class="questions row">
+<h1 class="title row">{{ page_title }}</h1>
+<div class="questions row">
     {% for question in question_list %}
         {% include "question/single_question.html" %}
     {% endfor %}
-    </div>
+</div>
 {% if question_list.has_other_pages %}
 <div class="pagination row">
    {% include "question/pagination.html" %}
 </div>
 {% endif %}
-</div>
-
 {% endblock %}

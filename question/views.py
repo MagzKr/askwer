@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from question.models import Question
+from answer.models import Answer
 from .forms import QuestionForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse
-from answer.views import get_answers
 from django.core.paginator import Paginator, PageNotAnInteger
 import random
 
@@ -25,14 +25,14 @@ def question_list_view(request):
     context = {
         'question_list': questions,
         'page_title': page_title,
-        'page_type': 'question_list' #changing type of stats container and num of visible chars of question.text
+        'page_type': 'question_list'  # changing type of stats container and num of visible chars of question.text
     }
     return render(request, 'question/question_list.html', context)
 
 
 def question_details(request, pk):
     question = Question.objects.select_related('author').get(pk=pk)
-    answers = get_answers(pk)
+    answers = Answer.objects.get_answers(pk)
     context = {
         'question': question,
         'answers': answers,
@@ -53,6 +53,7 @@ def create_question(request):
             new_question.tags.add(tag.strip(',.* '))
         return HttpResponseRedirect(new_question.get_url())
 
+
 @login_required
 def ask_question(request):
     question_form = QuestionForm()
@@ -63,6 +64,7 @@ def ask_question(request):
         'question_form': question_form
     }
     return render(request, 'question/ask_question.html', context)
+
 
 @login_required
 def rate_question(request):
@@ -79,7 +81,7 @@ def rate_question(request):
             else:
                 question.likes.add(request.user)
             question.save()
-            return JsonResponse({'response': 'Success', 'rating':question.rating})
+            return JsonResponse({'response': 'Success', 'rating': question.rating})
 
     if request.POST.get('method') == 'down':
         if request.user not in question.dislikes.all():
@@ -89,11 +91,13 @@ def rate_question(request):
             else:
                 question.dislikes.add(request.user)
             question.save()
-            return JsonResponse({'response': 'Success', 'rating':question.rating})
+            return JsonResponse({'response': 'Success', 'rating': question.rating})
+
 
 def add_random_question(request):
     for i in range(100):
-        text = 'itertools.product will generate all the possible values. Instead, what you want is to pick n random characters from chrs and concatenate them'
+        text = 'itertools.product will generate all the possible values. Instead, what you want is to pick n random ' \
+               'characters from chrs and concatenate them '
         tags = ['python', 'js', 'django', 'java', 'sql', 'css', 'html']
         words = text.split()
         new_question = Question()
@@ -102,7 +106,6 @@ def add_random_question(request):
         new_question.text = ' '.join(random.choices(words, k=20))
         new_question.rating = random.randint(-100, 100)
         new_question.save()
-        for i in range(random.randint(0, len(tags))):
+        for _ in range(random.randint(0, len(tags))):
             new_question.tags.add(random.choice(tags))
     return JsonResponse({'Response': 'OK'})
-

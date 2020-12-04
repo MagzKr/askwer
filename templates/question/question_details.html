@@ -1,27 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-<div class="col-7">
-    {% include "question/single_question.html" %}
-    <div class="answer-all container">
-        <h2 class="row">
-            Your Answer
-        </h2>
 
-        <form id="answerForm" class="row">
-            {% csrf_token %}
-            <textarea id=answerText placeholder='Add answer'></textarea><br>
-            <button id="answerButton">Add answer</button>
-        </form>
-    </div>
-    <div id='answerList' class="container">
-        {% if answers %}
-            {%for answer in answers %}
-                {% include "answer/single_answer.html" %}
-            {% endfor %}
-        {% endif %}
-    </div>
+{% include "question/single_question.html" %}
+<div class="answer-all container">
+<h2 class="row">Your Answer</h2>
+<form id="answerForm" class="row">
+    {% csrf_token %}
+    <textarea id=answerText placeholder='Add answer'></textarea><br>
+    <button id="answerButton">Add answer</button>
+</form>
 </div>
+<div id='answerList' class="container">
+    {% if answers %}
+        {%for answer in answers %}
+            {% include "answer/single_answer.html" %}
+        {% endfor %}
+    {% endif %}
+</div>
+
 
 <div>
     <script> const questionPk = {{ question.pk }} </script>

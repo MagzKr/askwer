@@ -8,8 +8,10 @@ from django.urls import reverse
 class Question_manager(models.Manager):
     def new(self):
         return self.select_related('author').order_by('-added_at')
+
     def popular(self):
         return self.select_related('author').order_by('-rating')
+
     def get_tag(self, tag):
         return self.select_related('author').filter(tags__name__in=[tag]).order_by('-added_at')
 

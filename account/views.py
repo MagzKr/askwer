@@ -14,5 +14,6 @@ def signup_view(request):
         return redirect('/')
     return render(request, 'registration/signup.html', {'form': form})
 
+
 def profile_view(request):
-    return render(request,'account/profile.html')
+    return render(request, 'account/profile.html')

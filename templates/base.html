@@ -36,15 +36,17 @@
         </div>
     </nav>
 </header>
-
-<div class="content row">
-    {% include "question/tags_col.html" %}
-
-    {% block content %}
-    {% endblock %}
+<div class="container>">
+    <div class="content row">
+        {% include "question/tags_col.html" %}
+        <div class="col-7">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
 </div>
 </body>
-<footer class="footer container">
+<footer class="footer">
     <div>
         <p>&copy; Stackoverflow Clone by &copy; Maksim Dzyuba</p>
     </div>
