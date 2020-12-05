@@ -6,7 +6,7 @@ services:
 before_script:
     - pip install docker-compose
     - docker-compose build db
-    - docker-compose up -d
+    - docker-compose up -d db
 script:
     - sleep 20
-    - python manage.py test question
+    - python manage.py test
