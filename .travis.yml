@@ -7,9 +7,10 @@ before_script:
     - pip install docker-compose
     - docker-compose build db
     - docker-compose up -d db
+    - sleep 10
     - python manage.py makemigrations question
     - python manage.py makemigrations answer
     - python manage.py migrate
 script:
-    - sleep 20
+    - sleep 5
     - python manage.py test
