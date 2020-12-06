@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','foo')
 
-DEBUG = bool(os.environ.get("DEBUG"))
+DEBUG = bool(os.environ.get("DEBUG", False))
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", '127.0.0.1 askwer-app.herokuapp.com').split(" ")
 
@@ -63,12 +63,12 @@ WSGI_APPLICATION = 'askwer.wsgi.application'
 
 DATABASES = {
         "default": {
-        "ENGINE": 'django.db.backends.postgresql_psycopg2',
+        "ENGINE": os.environ.get('DB_ENGINE', 'django.db.backends.postgresql_psycopg2'),
         "NAME": os.environ.get("SQL_DATABASE"),
         "USER": os.environ.get("SQL_USER"),
         "PASSWORD": os.environ.get("SQL_PASSWORD"),
-        "HOST": 'localhost',
-        "PORT": os.environ.get("SQL_PORT"),
+        "HOST": os.environ.get("SQL_HOST", 'localhost'),
+        "PORT": '5432',
     }
 }
 db_from_env = dj_database_url.config(conn_max_age=500)

@@ -67,6 +67,7 @@ body{padding-top:50px;}
                     display: flex;
                     padding: 12px 8px;
                     border-bottom: 1px solid #eff0f1;
+                    word-break: break-word;
 }
 
 .date{
