@@ -12,6 +12,7 @@ DEBUG = bool(os.environ.get("DEBUG", False))
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", '127.0.0.1 askwer-app.herokuapp.com').split(" ")
 
 INSTALLED_APPS = [
+    'rest_framework',
     'question',
     'answer',
     'account',

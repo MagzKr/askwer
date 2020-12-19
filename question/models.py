@@ -27,6 +27,9 @@ class Question(models.Model):
     objects = QuestionManager()
     tags = TaggableManager()
 
+    def get_tags(self):
+        return [tag.slug for tag in self.tags.all()]
+
     def get_url(self):
         return reverse('question_detail_view', args=[str(self.pk)])
 
