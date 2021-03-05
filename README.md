@@ -10,7 +10,7 @@ This is a project in which i made a simple clone of Stack Owerflow using Django.
 - PostgreSQL
 - Dockerized using Docker-Compose
 - Test and build using Travis CI
-- Deploy on Heroku
+- Deployed on Heroku
 
 ## How to run
 
